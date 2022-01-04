@@ -14,12 +14,12 @@ public class UsuarioController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public Usuario cadastrarUsuario(@RequestBody CadastroUsuarioDTO cadastroUsuarioDTO){
+    public void cadastrarUsuario(@RequestBody CadastroUsuarioDTO cadastroUsuarioDTO){
         Usuario usuario = new Usuario();
         usuario.setEmail(cadastroUsuarioDTO.getEmail());
         usuario.setSenha(cadastroUsuarioDTO.getSenha());
 
-        return usuarioService.salvarUsuario(usuario);
+        usuarioService.salvarUsuario(usuario);
     }
 
 }
