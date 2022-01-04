@@ -8,4 +8,8 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    public Usuario salvarUsuario(Usuario usuario){
+        return usuarioRepository.save(usuario);
+    }
+
 }
