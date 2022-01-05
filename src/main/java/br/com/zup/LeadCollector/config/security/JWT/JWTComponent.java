@@ -1,5 +1,8 @@
 package br.com.zup.LeadCollector.config.security.JWT;
 
+import br.com.zup.LeadCollector.config.security.JWT.exceptions.TokenInvalidoException;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,10 +22,19 @@ public class JWTComponent {
         Date vencimento = new Date(System.currentTimeMillis()+milissegundo);
 
         String token = Jwts.builder().setSubject(username)
-                .claim("idUsuario", id).setExpiration(vencimento)
+                .claim("idUsuario", id).setExpiration(vencimento).claim("aleatorio", "xablau")
                 .signWith(SignatureAlgorithm.HS512, segredo.getBytes()).compact();
 
         return token;
+    }
+
+    public Claims pegarClaims(String token){
+        try{
+            Claims claims = Jwts.parser().setSigningKey(segredo.getBytes()).parseClaimsJws(token).getBody();
+            return claims;
+        }catch (Exception e){
+            throw new TokenInvalidoException();
+        }
     }
 
 }
