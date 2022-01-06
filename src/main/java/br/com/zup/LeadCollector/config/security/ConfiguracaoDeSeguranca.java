@@ -1,6 +1,7 @@
 package br.com.zup.LeadCollector.config.security;
 
 import br.com.zup.LeadCollector.config.security.JWT.FiltroDeAutenticacaoJWT;
+import br.com.zup.LeadCollector.config.security.JWT.FiltroDeAutorizacaoJWT;
 import br.com.zup.LeadCollector.config.security.JWT.JWTComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -43,6 +44,7 @@ public class ConfiguracaoDeSeguranca extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilter(new FiltroDeAutenticacaoJWT(jwtComponent, authenticationManager()));
+        http.addFilter(new FiltroDeAutorizacaoJWT(authenticationManager(), jwtComponent, detailsService));
     }
 
     @Override
