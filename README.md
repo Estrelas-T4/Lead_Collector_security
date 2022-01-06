@@ -110,7 +110,7 @@
 
 -------
 #### Deletar Leads
-- /leads/{email}
+- /leads?email={email}
 - DELETE
 - Precisa de Token de Autenticação
 - Resposta 204
