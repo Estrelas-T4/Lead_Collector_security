@@ -33,7 +33,7 @@
 
 #### Login
 - /login
-- PUT
+- POST
 - json
 ````json
 {
