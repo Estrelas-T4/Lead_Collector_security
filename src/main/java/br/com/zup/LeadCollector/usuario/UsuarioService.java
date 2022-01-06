@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class UsuarioService {
     @Autowired
@@ -16,6 +19,23 @@ public class UsuarioService {
 
         usuario.setSenha(senhaEscondida);
         return usuarioRepository.save(usuario);
+    }
+
+    public void atualizarUsuario(Usuario usuario, UUID id){
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
+
+        if(usuarioOptional.isEmpty()){
+            throw new RuntimeException("Usuario não existe");
+        }
+
+        Usuario usuarioBanco = usuarioOptional.get();
+        if (!usuarioBanco.getEmail().equals(usuario.getEmail())){
+            usuarioBanco.setEmail(usuario.getEmail());
+        }
+
+        String senhaEscondida = encoder.encode(usuario.getSenha());
+        usuarioBanco.setSenha(senhaEscondida);
+        usuarioRepository.save(usuarioBanco);
     }
 
 }
