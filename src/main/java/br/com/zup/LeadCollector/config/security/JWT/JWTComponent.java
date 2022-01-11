@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.UUID;
 
 @Component
 public class JWTComponent {
@@ -18,7 +17,7 @@ public class JWTComponent {
     @Value("${jwt.milissegundos}")
     private Long milissegundo;
 
-    public String gerarToken(String username, UUID id){
+    public String gerarToken(String username, String id){
         Date vencimento = new Date(System.currentTimeMillis()+milissegundo);
 
         String token = Jwts.builder().setSubject(username)

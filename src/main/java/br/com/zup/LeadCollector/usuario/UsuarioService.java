@@ -5,7 +5,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class UsuarioService {
@@ -21,7 +20,7 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public void atualizarUsuario(Usuario usuario, UUID id){
+    public void atualizarUsuario(Usuario usuario, String id){
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
 
         if(usuarioOptional.isEmpty()){

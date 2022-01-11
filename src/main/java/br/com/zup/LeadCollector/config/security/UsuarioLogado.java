@@ -4,14 +4,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.UUID;
 
 public class UsuarioLogado implements UserDetails {
-    private UUID id;
+    private String id;
     private String email;
     private String senha;
 
-    public UsuarioLogado(UUID id, String email, String senha) {
+    public UsuarioLogado(String id, String email, String senha) {
         this.id = id;
         this.email = email;
         this.senha = senha;
@@ -20,11 +19,11 @@ public class UsuarioLogado implements UserDetails {
     public UsuarioLogado() {
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -1,14 +1,17 @@
 package br.com.zup.LeadCollector.usuario;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
+@Table(name = "usuarios")
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    private String id;
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
@@ -17,11 +20,11 @@ public class Usuario {
     public Usuario() {
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
